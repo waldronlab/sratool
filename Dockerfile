@@ -1,4 +1,4 @@
-# The suggested name for this image is: bioconductor/bioconductor_docker:devel
+# inherit from bioconductor_docker:devel
 FROM bioconductor/bioconductor_docker:devel
 
 LABEL name="waldronlab/sratool" \
