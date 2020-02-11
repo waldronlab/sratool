@@ -4,7 +4,7 @@ biocIMG=bioconductor/bioconductor_docker:devel
 
 docker pull $biocIMG
 
-DOCKER_RPKGS="$HOME/.docker-$version-packages"
+DOCKER_RPKGS="$HOME/.docker-devel-packages"
 DOCKER_HOME="$HOME/dockerhome"
 R_LIBS='/usr/local/lib/R/host-site-library:/usr/local/lib/R/site-library:/usr/local/lib/R/library'
 
@@ -15,7 +15,7 @@ if [ ! -f "$DOCKER_HOME"/.Renviron ]; then
     echo "R_LIBS=$R_LIBS" > $DOCKER_HOME/.Renviron
 fi
 
-TOKEN_EXP='GITHUB_[P|T].*'
+TOKEN_EXP='^GITHUB_[P|T].*'
 
 GPAT=`grep "$TOKEN_EXP" ~/.Renviron`
 GRENV=`grep "$TOKEN_EXP" $DOCKER_HOME/.Renviron`

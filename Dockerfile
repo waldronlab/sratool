@@ -9,8 +9,22 @@ LABEL name="waldronlab/sratool" \
       description="SRAtool for downloading and processing data on the cloud" \
       license="Artistic-2.0"
 
-RUN mkdir -p $HOME/ncbi/public $HOME/src \
-    && cd $HOME/src \
-    && wget "http://ftp-trace.ncbi.nlm.nih.gov/sra/sdk/2.10.2/sratoolkit.2.10.2-ubuntu64.tar.gz" \
-    && tar -xzf sratoolkit.2.10.2-ubuntu64.tar.gz
+ENV USER rstudio
+ENV HOME /home/rstudio
+
+VOLUME $HOME/github
+VOLUME $HOME/src
+VOLUME $HOME/ncbi/public
+
+ADD install.R /tmp/
+
+RUN cd $HOME/github \
+    && R -f /tmp/install.R
+
+# RUN cd $HOME/github \
+#     git clone https://github.com/waldronlab/SingleCellMultiModal
+#
+# RUN cd $HOME/src \
+#     && wget "http://ftp-trace.ncbi.nlm.nih.gov/sra/sdk/2.10.2/sratoolkit.2.10.2-ubuntu64.tar.gz" \
+#     && tar -xzf sratoolkit.2.10.2-ubuntu64.tar.gz
 
