@@ -11,20 +11,11 @@ LABEL name="waldronlab/sratool" \
 
 ENV USER rstudio
 ENV HOME /home/rstudio
+ENV PATH="$HOME/src/sratoolkit.2.10.2-ubuntu64/bin:${PATH}"
 
-VOLUME $HOME/github
-VOLUME $HOME/src
-VOLUME $HOME/ncbi/public
-
-ADD install.R /tmp/
-
-RUN cd $HOME/github \
-    && R -f /tmp/install.R
-
-# RUN cd $HOME/github \
-#     git clone https://github.com/waldronlab/SingleCellMultiModal
-#
-# RUN cd $HOME/src \
-#     && wget "http://ftp-trace.ncbi.nlm.nih.gov/sra/sdk/2.10.2/sratoolkit.2.10.2-ubuntu64.tar.gz" \
-#     && tar -xzf sratoolkit.2.10.2-ubuntu64.tar.gz
+RUN mkdir $HOME/github $HOME/src \
+    && git -C $HOME/github/ clone https://github.com/waldronlab/SingleCellMultiModal \
+    && cd $HOME/src \
+    && wget "http://ftp-trace.ncbi.nlm.nih.gov/sra/sdk/2.10.2/sratoolkit.2.10.2-ubuntu64.tar.gz" \
+    && tar -xzf sratoolkit.2.10.2-ubuntu64.tar.gz
 
